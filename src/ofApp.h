@@ -2,6 +2,7 @@
 
 #include "ofMain.h"
 #include "ofxOpenCv.h"
+#include "ofxThermalPrinter.h"
 
 class ofApp : public ofBaseApp{
 
@@ -9,6 +10,7 @@ public:
     void setup();
     void update();
     void draw();
+    void exit();
 
     void keyPressed(int key);
     void keyReleased(int key);
@@ -22,13 +24,20 @@ public:
     void dragEvent(ofDragInfo dragInfo);
     void gotMessage(ofMessage msg);
 
+    //cam stuff
     ofVideoGrabber myCam;
 
     deque<ofImage> ImgBuffer;
 
     deque<ofImage> sGrab;
 
+    deque<ofImage> sGrab2;
+
     ofPixels pixelData;
+
+    //printer stuff
+
+    ofxThermalPrinter myPrinter;
 
 
 
