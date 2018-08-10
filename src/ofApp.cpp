@@ -4,22 +4,25 @@
 void ofApp::setup(){
     ofSetVerticalSync(true);
     ofSetLogLevel(OF_LOG_VERBOSE);
-    ofSetFrameRate(5);
+    //ofSetFrameRate(5);
 
     //initialise the printer
     myPrinter.open("/dev/ttyUSB0");
     //these settings seem to work well!
-    myPrinter.setControlParameter(1, 150, 6);
+    myPrinter.setControlParameter(1, 100, 10);
+    //Settings to play with
+    //density
+    myPrinter.setPrintDensity(1,1);
+
 
     ofSetBackgroundColor(255);
 //    w = ofGetWidth()/2;
 //    h = ofGetHeight()/2;
 
-    w = 320;
-    h = 240;
+    w = 352;
+    h = 288;
 
     grainSize = 1;
-
 
 
     myCam.setDesiredFrameRate(5);
@@ -27,7 +30,7 @@ void ofApp::setup(){
 
     myCam.initGrabber(w,h);
     //set max buffer size to be the same as the width (for now)
-    maxBuffersize = w;
+    maxBuffersize = w*2;
 }
 
 //--------------------------------------------------------------
@@ -48,7 +51,8 @@ void ofApp::update(){
         sGrab.push_front(aI1);
         //alt image #2
         ofImage aI2;
-        aI2.grabScreen(0, h, w, h * 3);
+        //change this to include more/less of the image
+        aI2.grabScreen(0, h, w, h);
         sGrab2.push_front(aI2);
 
     }
@@ -67,14 +71,14 @@ void ofApp::draw(){
     //myCam.draw(0,0);
 
     //for the binarising bit, set between 0-255, find which one works best for the light levels
-    int threshold = 100;
+    int threshold = 150;
 
-    for(int x = 0; x < w; x += grainSize*2){
-        for(int y = 0; y < h; y += grainSize*2){
+    for(int x = 0; x < w; x += grainSize*4){
+        for(int y = 0; y < h; y += grainSize*4){
             ofPushStyle();
             ofColor colXY = ImgBuffer[0].getColor(x,y);
             int colBright = colXY.getBrightness();
-            float colMap = ofMap(colBright, 0, 255, 5, 0);
+            float colMap = ofMap(colBright, 0, 255, 20, 0);
             int b;
             //binarise the values to get just black or white
             if(colBright < threshold){
@@ -83,11 +87,17 @@ void ofApp::draw(){
             else if(colBright > threshold){
                 b = 255;
             }
-            ofSetColor(b);
+            //different ways of setting the colour - 'colBright' gives more detailed greyscale, 'b' is binary contrast(black or white)
+            ofSetColor(0);
             //ofSetCircleResolution(20);
             //ofSetColor(colBright);
-            ofDrawCircle(x,y, colMap);
+            //use 'grain size' to draw a uniform grid, or use 'colMap' for brightness to size mapping
+            //ofDrawCircle(x,y, grainSize);
+            OF_RECTMODE_CENTER;
+            ofNoFill();
+            ofDrawRectangle(x,y, colMap, colMap);
             ofPopStyle();
+
         }
     }
 
@@ -103,11 +113,9 @@ void ofApp::draw(){
             sGrab[i].drawSubsection(0, i + h + h,w,grainSize, 0, i);
             ofPopStyle();
         }
-
-
-
-
-
+//    for(int i = 0; i < sGrab.size(); i ++){
+//        sGrab[sGrab.size() - 1].draw(0,h,w,h);
+//    }
 
 }
 void ofApp::exit(){
@@ -117,9 +125,11 @@ void ofApp::exit(){
 //--------------------------------------------------------------
 void ofApp::keyPressed(int key){
     if(key == 'p'){
-        for(int i = 0; i < sGrab2.size(); i += 10){
-        myPrinter.print(sGrab2[i]);
-        }
+        //with a for loop this prints quite a lot...
+//        for(int i = 0; i < sGrab2.size(); i += 10){
+//        myPrinter.print(sGrab2[i]);
+//        }
+        myPrinter.print(sGrab2[0]);
 
     }
 
