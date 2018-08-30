@@ -18,8 +18,8 @@ void ofApp::setup(){
 //    w = ofGetWidth()/2;
 //    h = ofGetHeight()/2;
 
-    w = ofGetWidth();
-    h = ofGetHeight()/3;
+    w = ofGetWidth()/3;
+    h = ofGetHeight();
 
     //w = 352;
     //h = 288;
@@ -32,7 +32,7 @@ void ofApp::setup(){
 
     //myCam.initGrabber(w,h);
     //set max buffer size to be the same as the width (for now)
-    maxBuffersize = w*2;
+    maxBuffersize = w;
 
 }
 
@@ -126,9 +126,9 @@ void ofApp::draw(){
             ofPushStyle();
             //ofSetColor(255);
             //vertical scan
-            sGrab[i].drawSubsection(i,h,grainSize,h,i, 0);
+            sGrab[i].drawSubsection(i + w,0,grainSize,h,i, 0);
             //horizontal scan
-            sGrab[i].drawSubsection(0, i + h + h,w,grainSize, 0, i);
+            sGrab[i].drawSubsection(w*2,0 + i,w,grainSize, 0, i);
             ofPopStyle();
         }
 
