@@ -4,6 +4,7 @@
 #include "ofxOpenCv.h"
 #include "ofxThermalPrinter.h"
 
+
 class ofApp : public ofBaseApp{
 
 public:
@@ -23,9 +24,14 @@ public:
     void windowResized(int w, int h);
     void dragEvent(ofDragInfo dragInfo);
     void gotMessage(ofMessage msg);
+    void timer();
+
+    int time;
 
     //cam stuff
     ofVideoGrabber myCam;
+
+    ofVideoPlayer tLapse;
 
     deque<ofImage> ImgBuffer;
 
@@ -51,10 +57,6 @@ public:
     int grainSize;
     //colour mapping to brightness
     int colBright;
-
-
-
-
 
 
 };

@@ -19,7 +19,7 @@ Project{
 
         of.addons: [
             'ofxOpenCv',
-            'ofxThermalPrinter'
+            'ofxThermalPrinter',
         ]
 
         // additional flags for the project. the of module sets some
