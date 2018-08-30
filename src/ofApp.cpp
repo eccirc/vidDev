@@ -18,8 +18,8 @@ void ofApp::setup(){
 //    w = ofGetWidth()/2;
 //    h = ofGetHeight()/2;
 
-    w = ofGetWidth() / 3;
-    h = ofGetHeight() / 3;
+    w = ofGetWidth();
+    h = ofGetHeight()/3;
 
     //w = 352;
     //h = 288;
@@ -84,12 +84,7 @@ void ofApp::draw(){
 
      ImgBuffer[0].draw(0,0,w,h);
 
-    if(ImgBuffer.size() >= 201){
-    ImgBuffer[50].draw(w,0,w,h);
-    ImgBuffer[150].draw(0,h,w,h);
-    ImgBuffer[200].draw(w,h,w,h);
 
-    }
 
 
     //for the binarising bit, set between 0-255, find which one works best for the light levels
@@ -127,15 +122,15 @@ void ofApp::draw(){
 
 
     //Now to figure out how to get a slitscan from the image above...
-//        for(int i = 0; i < sGrab.size(); i ++){
-//            ofPushStyle();
-//            //ofSetColor(255);
-//            //vertical scan
-//            sGrab[0].drawSubsection(i,h,grainSize,h,i, 0);
-//            //horizontal scan
-//            sGrab[0].drawSubsection(0, i + h + h,w,grainSize, 0, i);
-//            ofPopStyle();
-//        }
+        for(int i = 0; i < sGrab.size(); i ++){
+            ofPushStyle();
+            //ofSetColor(255);
+            //vertical scan
+            sGrab[i].drawSubsection(i,h,grainSize,h,i, 0);
+            //horizontal scan
+            sGrab[i].drawSubsection(0, i + h + h,w,grainSize, 0, i);
+            ofPopStyle();
+        }
 
 //    for(int i = 0; i < sGrab.size(); i ++){
 //        sGrab[sGrab.size() - 1].draw(0,h,w,h);
