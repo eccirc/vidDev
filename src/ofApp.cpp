@@ -1,45 +1,37 @@
+/*This is the code for my 2018 end of year project in Computational Arts at Goldsmiths university. All credit for the code goes to
+Theo Papatheodorou and the week 6 lesson in Workshops in Creative Coding from which this code is adapted. The footage used was gathered by myself 
+using a raspberry pi with a camera attached using a timelapse photography technique, the methods of which are detailed here: https://www.raspberrypi.org/documentation/usage/camera/raspicam/timelapse.md
+The footage is roughly sixteen hours of growth of the slime-mould Phsarum Polycephalum, condensed into just a few minutes.
+This program is very simple but quite satisfying to watch!*/
+
+
 #include "ofApp.h"
 
 //--------------------------------------------------------------
 void ofApp::setup(){
-    ofSetVerticalSync(true);
-    ofSetLogLevel(OF_LOG_VERBOSE);
-
-    //initialise the printer
-    myPrinter.open("/dev/ttyUSB0");
-    //these settings seem to work well!
-    myPrinter.setControlParameter(1, 100, 10);
-    //Settings to play with
-    //density
-    myPrinter.setPrintDensity(1,1);
-
-
+   
     ofSetBackgroundColor(255);
-//    w = ofGetWidth()/2;
-//    h = ofGetHeight()/2;
 
+//segment the canvas nicely
     w = ofGetWidth()/3;
     h = ofGetHeight();
 
-    //w = 352;
-    //h = 288;
-
-    tLapse.load("timelapseSlower.avi");
-
+//load the timelapse footage
+    tLapse.load("timelapse2.avi");
+//start the video
     tLapse.play();
-
+//change this to get a smaller/wider slitscan image
     grainSize = 1;
 
-    //myCam.initGrabber(w,h);
-    //set max buffer size to be the same as the width (for now)
+//set max buffer size to be the same as the width (this will make sense when the slitscan code is doing its thing)
     maxBuffersize = w;
+
 
 }
 
 //--------------------------------------------------------------
 void ofApp::update(){
-    //myCam.update();
-
+    //update the footage
     tLapse.update();
 
     //save video data into an ofImage deque to store the individual frames
@@ -69,149 +61,26 @@ void ofApp::update(){
         sGrab2.pop_back();
     }
 
-    time ++;
-    if(time >= 30){
-            time = 0;
-    }
-
-
 }
 
 //--------------------------------------------------------------
 void ofApp::draw(){
 
-    //tLapse.draw(0,0, w, h);
-
-     ImgBuffer[0].draw(0,0,w,h);
+    tLapse.draw(0,0, w, h);
 
 
 
-
-    //for the binarising bit, set between 0-255, find which one works best for the light levels
-//    int threshold = 200;
-
-//    for(int x = 0; x < w; x += grainSize*2){
-//        for(int y = 0; y < h; y += grainSize*2){
-//            ofPushStyle();
-//            ofColor colXY = ImgBuffer[0].getColor(x,y);
-//            int colBright = colXY.getBrightness();
-//            float colMap = ofMap(colBright, 0, 255, 20, 0);
-//            int b;
-//            //binarise the values to get just black or white
-//            if(colBright < threshold){
-//                b = 0;
-//            }
-//            else if(colBright > threshold){
-//                b = 255;
-//            }
-//            //different ways of setting the colour - 'colBright' gives more detailed greyscale, 'b' is binary contrast(black or white)
-//            //ofSetColor(b);
-//            //ofSetCircleResolution(20);
-//            ofSetColor(colBright);
-//            //use 'grain size' to draw a uniform grid, or use 'colMap' for brightness to size mapping
-//            ofDrawCircle(x,y, grainSize);
-//            //OF_RECTMODE_CENTER;
-//            //ofNoFill();
-//            //ofDrawRectangle(x,y, colMap/2, colMap/2);
-//            ofPopStyle();
-
-//        }
-//    }
-
-
-
-
-    //Now to figure out how to get a slitscan from the image above...
+    //Below utilises the 'slitscan' technique with a subsection of pixels being drawn across the screen
+    //In this case, two sigle pixel lines moving horizontally and vertically which scan across the
+    //timelapse footage. 
         for(int i = 0; i < sGrab.size(); i ++){
             ofPushStyle();
-            //ofSetColor(255);
             //vertical scan
             sGrab[i].drawSubsection(i + w,0,grainSize,h,i, 0);
             //horizontal scan
             sGrab[i].drawSubsection(w*2,0 + i,w,grainSize, 0, i);
             ofPopStyle();
         }
-
-//    for(int i = 0; i < sGrab.size(); i ++){
-//        sGrab[sGrab.size() - 1].draw(0,h,w,h);
-//    }
-
-//        if(ofGetElapsedTimef() >= 60){
-//            myPrinter.print(sGrab2[0]);
-//            ofResetElapsedTimeCounter();
-//        }
-
-
-}
-void ofApp::exit(){
-    myPrinter.close();
 }
 
-//--------------------------------------------------------------
-void ofApp::keyPressed(int key){
-    if(key == 'p'){
-        //with a for loop this prints quite a lot...
-//        for(int i = 0; i < sGrab2.size(); i += 10){
-//        myPrinter.print(sGrab2[i]);
-//        }
-        myPrinter.print(sGrab2[0]);
 
-    }
-
-}
-//---
-void ofApp::timer(){
-    if(time >= 30){
-        myPrinter.print(ImgBuffer[0]);
-    }
-}
-
-//--------------------------------------------------------------
-void ofApp::keyReleased(int key){
-
-}
-
-//--------------------------------------------------------------
-void ofApp::mouseMoved(int x, int y ){
-
-}
-
-//--------------------------------------------------------------
-void ofApp::mouseDragged(int x, int y, int button){
-
-}
-
-//--------------------------------------------------------------
-void ofApp::mousePressed(int x, int y, int button){
-
-}
-
-//--------------------------------------------------------------
-void ofApp::mouseReleased(int x, int y, int button){
-
-}
-
-//--------------------------------------------------------------
-void ofApp::mouseEntered(int x, int y){
-
-}
-
-//--------------------------------------------------------------
-void ofApp::mouseExited(int x, int y){
-
-}
-
-//--------------------------------------------------------------
-void ofApp::windowResized(int w, int h){
-
-}
-
-//--------------------------------------------------------------
-void ofApp::gotMessage(ofMessage msg){
-
-}
-
-//--------------------------------------------------------------
-void ofApp::dragEvent(ofDragInfo dragInfo){
-
-}

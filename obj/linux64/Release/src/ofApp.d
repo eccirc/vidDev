@@ -347,21 +347,7 @@ obj/linux64/Release/src/ofApp.o: \
  /home/davidgw/Programming/OF/libs/openFrameworks/video/ofVideoPlayer.h \
  /home/davidgw/Programming/OF/libs/openFrameworks/video/ofGstVideoPlayer.h \
  /home/davidgw/Programming/OF/libs/openFrameworks/3d/ofCamera.h \
- /home/davidgw/Programming/OF/libs/openFrameworks/3d/ofEasyCam.h \
- /home/davidgw/Programming/OF/addons/ofxOpenCv/src/ofxOpenCv.h \
- /home/davidgw/Programming/OF/addons/ofxOpenCv/src/ofxCvConstants.h \
- /usr/include/opencv/cv.h \
- /home/davidgw/Programming/OF/addons/ofxOpenCv/src/ofxCvImage.h \
- /home/davidgw/Programming/OF/addons/ofxOpenCv/src/ofxCvGrayscaleImage.h \
- /home/davidgw/Programming/OF/addons/ofxOpenCv/src/ofxCvBlob.h \
- /home/davidgw/Programming/OF/addons/ofxOpenCv/src/ofxCvColorImage.h \
- /home/davidgw/Programming/OF/addons/ofxOpenCv/src/ofxCvFloatImage.h \
- /home/davidgw/Programming/OF/addons/ofxOpenCv/src/ofxCvShortImage.h \
- /home/davidgw/Programming/OF/addons/ofxOpenCv/src/ofxCvContourFinder.h \
- /home/davidgw/Programming/OF/addons/ofxOpenCv/src/ofxCvHaarFinder.h \
- /home/davidgw/Programming/OF/addons/ofxThermalPrinter/src/ofxThermalPrinter.h \
- /home/davidgw/Programming/OF/addons/ofxThermalPrinter/src/serial.h \
- /home/davidgw/Programming/OF/addons/ofxThermalPrinter/src/v8stdint.h
+ /home/davidgw/Programming/OF/libs/openFrameworks/3d/ofEasyCam.h
 
 /home/davidgw/Programming/OF/apps/myApps/vidDev/src/ofApp.h:
 
@@ -1092,31 +1078,3 @@ obj/linux64/Release/src/ofApp.o: \
 /home/davidgw/Programming/OF/libs/openFrameworks/3d/ofCamera.h:
 
 /home/davidgw/Programming/OF/libs/openFrameworks/3d/ofEasyCam.h:
-
-/home/davidgw/Programming/OF/addons/ofxOpenCv/src/ofxOpenCv.h:
-
-/home/davidgw/Programming/OF/addons/ofxOpenCv/src/ofxCvConstants.h:
-
-/usr/include/opencv/cv.h:
-
-/home/davidgw/Programming/OF/addons/ofxOpenCv/src/ofxCvImage.h:
-
-/home/davidgw/Programming/OF/addons/ofxOpenCv/src/ofxCvGrayscaleImage.h:
-
-/home/davidgw/Programming/OF/addons/ofxOpenCv/src/ofxCvBlob.h:
-
-/home/davidgw/Programming/OF/addons/ofxOpenCv/src/ofxCvColorImage.h:
-
-/home/davidgw/Programming/OF/addons/ofxOpenCv/src/ofxCvFloatImage.h:
-
-/home/davidgw/Programming/OF/addons/ofxOpenCv/src/ofxCvShortImage.h:
-
-/home/davidgw/Programming/OF/addons/ofxOpenCv/src/ofxCvContourFinder.h:
-
-/home/davidgw/Programming/OF/addons/ofxOpenCv/src/ofxCvHaarFinder.h:
-
-/home/davidgw/Programming/OF/addons/ofxThermalPrinter/src/ofxThermalPrinter.h:
-
-/home/davidgw/Programming/OF/addons/ofxThermalPrinter/src/serial.h:
-
-/home/davidgw/Programming/OF/addons/ofxThermalPrinter/src/v8stdint.h:
